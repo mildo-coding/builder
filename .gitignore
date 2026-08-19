@@ -1,0 +1,14 @@
+*.png
+*.jpg
+*.gif
+*.bmp
+*.tiff
+*.ico
+*.webp
+*.svg
+*.eps
+*.pdf
+*.docx
+*.doc
+.cursor
+.DS_Store
