@@ -30,6 +30,8 @@ def _m(
     texturas: str,
     componentes: list[str],
     notas: str = "",
+    z0: float = 0.0,
+    en_planta: bool = True,
 ) -> Spec:
     return {
         "id": id,
@@ -42,12 +44,14 @@ def _m(
         "y": y,
         "w": w,
         "d": d,
+        "z0": z0,
         "frente_hacia": frente_hacia,
         "ubicacion": ubicacion,
         "materiales": materiales,
         "texturas": texturas,
         "componentes": componentes,
         "notas": notas,
+        "en_planta": en_planta,
     }
 
 
@@ -83,6 +87,7 @@ ESPACIOS: dict[str, Spec] = {
             "Panelado de madera en la pared de TV, mueble bar a medida con LED "
             "indirecta, comedor cerca de la salida al balcón."
         ),
+        "alzado_principal": "S",
         "muebles": {
             "PANELADO_TV": _m(
                 "PANELADO_TV", "Panelado TV / audio", "panel",
@@ -380,6 +385,7 @@ ESPACIOS: dict[str, Spec] = {
                 [_mat("Silestone Calacatta / blanco cálido", "tapa", "silestone")],
                 "Encimera continua con pileta bajo mesada y anafe a ras.",
                 ["espesor 20 mm", "antepecho 8 cm"],
+                z0=0.86,
             ),
             "ALACENA": _m(
                 "ALACENA", "Alacenas superiores", "placard",
@@ -389,6 +395,7 @@ ESPACIOS: dict[str, Spec] = {
                  _mat("LED 3000K", "tira bajo mueble", "blanco")],
                 "Puertas verticales, interior blanco, campana integrada en un tramo.",
                 ["luz de trabajo", "campana encastrada"],
+                z0=1.50,
             ),
             "TORRE_HORNOS": _m(
                 "TORRE_HORNOS", "Torre de hornos", "appliance",
@@ -450,15 +457,22 @@ ESPACIOS: dict[str, Spec] = {
         "nombre": "Lavadero",
         "slug": "lavadero",
         "grupo": "C. Área de servicios y cocina",
-        "ancho": 2.00,
-        "largo": 2.81,
-        "ancho_total": 2.625,
-        "alto": 2.50,
-        "superficie": 5.62,
+        "ancho": 2.65,
+        "ancho_norte": 2.08,
+        "ancho_sur": 2.65,
+        "ancho_norte_total": 2.20,
+        "ancho_sur_total": 2.80,
+        "largo_oeste": 2.80,
+        "largo_oeste_total": 3.00,
+        "y_escalon": 0.52,
+        "largo": 2.80,
+        "alto": 2.80,
+        "superficie": 6.12,
         "descripcion": (
-            "Local técnico extraído del plano original. Placard de secado ajustado "
-            "a 1.50 × 0.625 m, con puerta piso a techo y cierre de tabique sólido. "
-            "Incluye lavarropas, secarropas, piletón y guardado de limpieza."
+            "Local no rectangular: norte 2.08 m útiles (2.20 tot.), sur 2.65 m útiles "
+            "(2.80 tot.), oeste 2.80 m útiles (3.00 tot.). Oeste: placard de secado + "
+            "escobero. Norte: banitori, pileta, mesada de planchar y lavarropas. Este: "
+            "abertura 1.60 m + mueble divisor 1.20 m. Sur: coffee station."
         ),
         "adjacencias": {
             "N": "Baño de servicio",
@@ -466,66 +480,131 @@ ESPACIOS: dict[str, Spec] = {
             "E": "Cocina",
         },
         "puertas": [
-            {"nombre": "Puerta de servicio", "muro": "S", "ancho": 0.80, "offset": 0.625},
-            {"nombre": "A cocina", "muro": "E", "ancho": 0.80, "offset": 0.20},
+            {"nombre": "Puerta de servicio", "muro": "S", "ancho": 0.80, "offset": 0.625, "alto": 2.10},
+            {"nombre": "Paso a cocina", "muro": "E", "ancho": 1.60, "offset": 0.00, "alto": 2.80},
         ],
         "criterio": (
-            "El placard arranca contra el muro junto a la puerta de servicio y "
-            "termina con tabique sólido de 10 cm. El tramo norte original se libera "
-            "como piso útil (pileta y circulación)."
+            "Sur más largo que norte (+0.57 m al este): coffee station junto a la puerta. "
+            "Oeste: placard 1.50 + escobero 0.30 + paso + banitori/pileta en NW. "
+            "Este sin muro de obra: abertura 1.60 m y mueble divisor 1.20 × 0.60 × 2.80 "
+            "(cestos al lavadero, columna de cocción a cocina, baulera arriba)."
         ),
-        "plano_custom": True,
+        "alzado_principal": "N",
+        "muros_omitidos": ["E"],
         "muebles": {
             "PLACARD_SECADO": _m(
                 "PLACARD_SECADO", "Placard de secado", "placard",
-                1.50, 0.625, 2.50, 0.00, 0.00, 0.625, 1.50, "E",
-                "Muro oeste. Empieza contra la pared junto a la puerta de servicio "
-                "y termina con tabique sólido de 10 cm. Frente al interior del lavadero.",
+                1.50, 0.625, 2.80, 0.00, 0.00, 0.625, 1.50, "E",
+                "Muro oeste, desde la puerta de servicio hacia el norte. Piso a techo.",
                 [_mat("Roble / petiribí", "frente piso a techo, dos hojas de 0.75 m", "roble"),
                  _mat("Listones ventilados", "interior / trasdosado", "petiribi"),
                  _mat("Metal negro", "barra perchero y herrajes", "metal")],
-                "Carpintería piso a techo (H = 2.50 m). Veta vertical. Interior ventilado "
-                "para secado de ropa, con barra a 1.80 m y reja inferior.",
-                ["2 hojas 0.75 m", "barra perchero", "ventilación inferior y superior",
-                 "tabique de cierre 0.10 m"],
-                "Profundidad 0.625 m (interior ~0.60 m para perchas). Largo de frente 1.50 m.",
+                "Carpintería piso a techo. Interior ventilado para secado, barra a 1.80 m.",
+                ["2 hojas 0.75 m", "barra perchero", "ventilación inferior y superior"],
+                "Profundidad 0.625 m. Largo de frente 1.50 m.",
             ),
-            "LAVARROPAS": _m(
-                "LAVARROPAS", "Lavarropas", "appliance",
-                0.60, 0.60, 0.85, 2.025, 0.90, 0.60, 0.60, "O",
-                "Muro este, tramo sur-centro, junto a la puerta a cocina. Carga frontal.",
-                [_mat("Acero blanco / grafito", "carcasa", "grafito"),
-                 _mat("Vidrio", "visor", "vidrio")],
-                "Equipo de 8–9 kg, 60×60 cm, encastrable bajo mesada técnica opcional.",
-                ["carga frontal", "desagüe y toma de agua en muro este"],
+            "ESCOBERO": _m(
+                "ESCOBERO", "Escobero", "placard",
+                0.30, 0.625, 2.80, 0.00, 1.50, 0.625, 0.30, "E",
+                "Muro oeste, inmediato al norte del placard de secado. Piso a techo.",
+                [_mat("Roble", "frente", "roble"),
+                 _mat("Grafito", "interior", "grafito")],
+                "Módulo estrecho para escobas y trapeadores. Al norte queda un paso libre "
+                "hasta el banitori / pileta del rincón NW.",
+                ["piso a techo 2.80 m", "frente 30 cm", "fondo 62.5 cm"],
             ),
-            "SECARROPAS": _m(
-                "SECARROPAS", "Secarropas", "appliance",
-                0.60, 0.60, 0.85, 2.025, 0.90, 0.60, 0.60, "O",
-                "Apilado sobre el lavarropas (kit de torre) en el mismo hueco de 60×60.",
-                [_mat("Acero blanco / grafito", "carcasa", "grafito")],
-                "Torre lavarropas + secarropas para liberar piso. Evacuación de humedad al muro.",
-                ["kit de apilado", "altura total torre ~1.70 m"],
-                "En planta ocupa la misma huella que el lavarropas.",
+            "BANITORI": _m(
+                "BANITORI", "Mueble banitori", "placard",
+                0.51, 0.60, 0.85, 0.00, 2.20, 0.51, 0.60, "S",
+                "Rincón NW, muro norte. Bajo de apoyo hasta 0.85 m (misma cota que la pileta).",
+                [_mat("Roble", "frentes", "roble"),
+                 _mat("Grafito", "interior", "grafito")],
+                "Mueble bajo junto a la pileta. Visible en alzado norte y oeste.",
+                ["alto 0.85 m", "fondo 60 cm", "frente 51 cm"],
             ),
             "PILETON": _m(
-                "PILETON", "Piletón de lavar", "pileta",
-                0.50, 0.40, 0.90, 0.00, 2.20, 0.50, 0.40, "E",
-                "Rincón noroeste, en el piso útil ganado al recortar el placard original.",
+                "PILETON", "Pileta de lavar", "pileta",
+                0.405, 0.50, 0.35, 0.00, 2.00, 0.50, 0.405, "E",
+                "Muro oeste, rincón NW. Cuba de 0.50 m a 0.85 m de altura. Visible también "
+                "desde el alzado norte.",
                 [_mat("Acero inoxidable", "cuba", "metal"),
-                 _mat("Roble tratado", "mueble bajo pileta", "roble"),
                  _mat("Grifería negra", "pico alto", "negro")],
-                "Cuba profunda sobre mueble de 90 cm. Grifería negra de pico alto para palanganas.",
-                ["cuba 40×35×25", "mueble con estante de limpieza"],
+                "Entre el escobero y el banitori queda un paso; la pileta cuelga / apoya "
+                "en el tramo norte del oeste. Cota superior 0.85 m = mesada de planchar.",
+                ["cuba 40×35×25", "cota superior 0.85 m"],
+                z0=0.50,
             ),
-            "MUEBLE_LIMPIEZA": _m(
-                "MUEBLE_LIMPIEZA", "Mueble de limpieza", "placard",
-                0.40, 0.35, 2.00, 2.225, 1.70, 0.40, 0.35, "O",
-                "Muro este, al norte de la torre de lavado, para productos y palo de piso.",
-                [_mat("Grafito", "frentes", "grafito"),
-                 _mat("Roble", "interior", "roble")],
-                "Módulo alto y estrecho, puerta de 40 cm, interior con ganchos y bandejas.",
-                ["guarda escoba", "bandejas de químicos"],
+            "LAVARROPAS": _m(
+                "LAVARROPAS", "Lavarropas frontal", "appliance",
+                0.60, 0.60, 0.85, 0.51, 2.20, 0.60, 0.60, "S",
+                "Muro norte, bajo la mesada de planchar, al este del banitori.",
+                [_mat("Acero blanco / grafito", "carcasa", "grafito"),
+                 _mat("Vidrio", "visor", "vidrio")],
+                "Equipo 60×60×85 cm. Carga frontal hacia el local.",
+                ["carga frontal", "bajo mesada"],
+            ),
+            "MESADA_PLANCHAR": _m(
+                "MESADA_PLANCHAR", "Mesada de planchado", "mesada",
+                1.48, 0.60, 0.02, 0.51, 2.20, 1.48, 0.60, "S",
+                "Muro norte. Tablero 1.48 × 0.60 m a la misma altura que el tope de pileta (0.85 m).",
+                [_mat("Silestone / compacto blanco cálido", "tablero 20 mm", "silestone"),
+                 _mat("Opcional paño de planchar", "protección térmica móvil", "lino")],
+                "Cubre lavarropas y sigue hacia el este. Cota superior 0.85 m.",
+                ["espesor 2 cm", "cota 0.85 m", "largo 1.48 m", "fondo 60 cm"],
+                z0=0.85,
+            ),
+            "ALACENA": _m(
+                "ALACENA", "Alacena limpieza y baño", "placard",
+                2.08, 0.35, 1.10, 0.00, 2.45, 2.08, 0.35, "S",
+                "Muro norte, todo el ancho útil (2.08 m). De 1.70 m a techo. Fondo 35 cm.",
+                [_mat("Roble", "frentes", "roble"),
+                 _mat("Grafito", "interior y estantes", "grafito"),
+                 _mat("LED 3000K", "tira bajo alacena", "blanco")],
+                "Productos de limpieza y baño. LED bajo mueble.",
+                ["arranque 1.70 m", "alto 1.10 m", "fondo 35 cm", "ancho 2.08 m"],
+                z0=1.70,
+            ),
+            "MUEBLE_DIVISOR": _m(
+                "MUEBLE_DIVISOR", "Mueble divisor lavadero–cocina", "placard",
+                1.20, 0.60, 2.80, 1.48, 1.60, 0.60, 1.20, "O",
+                "Cierre este del tramo norte (sin muro de obra). 1.20 × 0.60 × 2.80 m. "
+                "Inferior al lavadero (cestos), medio a cocina (columna de cocción), "
+                "superior baulera.",
+                [_mat("MDF laqueado grafito", "frente cocina", "grafito"),
+                 _mat("Melamina roble", "frente lavadero e interiores", "roble")],
+                "Tres bandas: 0–0.70 cestos al lavadero; 0.70–1.90 columna horno/micro "
+                "a cocina + alacena ciega al lavadero; 1.90–2.80 baulera push-to-open.",
+                ["cestos extraíbles 0–0.70", "columna cocción a cocina", "baulera 1.90–2.80"],
+            ),
+            "CAFE_BAJO": _m(
+                "CAFE_BAJO", "Coffee station — bajo", "placard",
+                1.225, 0.50, 0.88, 1.425, 0.00, 1.225, 0.50, "N",
+                "Muro sur, al este de la puerta de servicio. Frente al local (norte).",
+                [_mat("Roble", "frentes de cajones y puerta", "roble"),
+                 _mat("Grafito", "interior", "grafito")],
+                "Minibar 45 cm + cajones/puerta 77.5 cm. La hoja de la puerta se estaciona "
+                "contra el costado oeste del mueble.",
+                ["minibar 45 cm", "2 cajones", "zócalo 8 cm"],
+            ),
+            "CAFE_MESADA": _m(
+                "CAFE_MESADA", "Coffee station — mesada", "mesada",
+                1.225, 0.52, 0.02, 1.425, 0.00, 1.225, 0.52, "N",
+                "Muro sur. Tablero a 0.90 m sobre el coffee station.",
+                [_mat("Silestone / compacto blanco cálido", "tablero 20 mm", "silestone")],
+                "Espresso + molinillo y pava. Sin toma de agua.",
+                ["espesor 2 cm", "cota 90 cm", "largo 1.225 m"],
+                z0=0.88,
+            ),
+            "CAFE_ALACENA": _m(
+                "CAFE_ALACENA", "Coffee station — alacena", "placard",
+                1.225, 0.32, 1.25, 1.425, 0.00, 1.225, 0.32, "N",
+                "Muro sur, de 1.55 m a techo. Tazas, café y vajilla de desayuno.",
+                [_mat("Roble", "frentes", "roble"),
+                 _mat("Grafito", "interior", "grafito"),
+                 _mat("LED 3000K", "tira bajo alacena", "blanco")],
+                "Hueco 65 cm para la máquina. Dos puertas.",
+                ["arranque 1.55 m", "alto 1.25 m", "fondo 32 cm"],
+                z0=1.55,
             ),
         },
     },
@@ -646,6 +725,7 @@ ESPACIOS: dict[str, Spec] = {
                  _mat("LED 3000K", "halo perimetral", "blanco")],
                 "Luna rectangular con halo LED difuso, sin marco visto.",
                 ["90 × 90 cm", "IP44"],
+                z0=1.00,
             ),
             "DUCHERO": _m(
                 "DUCHERO", "Duchero moderno", "ducha",

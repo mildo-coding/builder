@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render del mueble Piletón de lavar — Lavadero."""
+"""Render del mueble Pileta de lavar — Lavadero."""
 from __future__ import annotations
 import sys
 from pathlib import Path

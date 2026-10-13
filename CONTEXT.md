@@ -61,9 +61,9 @@ El conocimiento de cada local (medidas, layout, muebles, materiales y comandos d
    * **Usos y Propuesta de Diseño:** Sector de comidas rápidas e informales, desayunador o espacio de reuniones cotidianas. Puede conectarse de forma semintegrada con la cocina mediante barra de madera o cerramiento acristalado con perfilería negra.
 
 8. **Lavadero y Placard de Secado (Ajustado)**
-   * **Dimensiones principales:** Lavadero ~2.00 m x 2.81 m.
+   * **Dimensiones principales:** Muro norte 2.08 m útiles (2.20 tot.); muro sur 2.65 m útiles (2.80 tot.); largo 2.81 m. No es rectangular.
    * **Placard de secado:** 1.50 m de largo por con 62.5cm de ancho y de frente se ve una puerta de piso a techo. esta ubicado Empieza contra la pared al lado de la puerta de servicio y termina con una pared sólida.
-   * **Usos y Propuesta de Diseño:** Sector técnico para lavarropas, secarropas, piletón de lavar, guardado de productos de limpieza y placard específico para secado de ropa de 1.5 m.
+   * **Usos y Propuesta de Diseño:** Norte: armario de limpieza, lavarropas, pileta y mesada de planchar. Sur, al este de la puerta: coffee station (1.225 m) en el extra de 0.57 m hacia la cocina. Cestos 40×40 en el placard de secado.
 
 9. **Baño de Servicio**
    * **Dimensiones principales:** ~1.30 m x 1.20 m.
@@ -127,13 +127,19 @@ Cada carpeta de espacio contiene:
 ### Comandos (solo cuando el usuario los pide)
 
 ```bash
-# Todo el departamento
+# Todo el departamento, o un espacio
 python3 espacios/generar_todo.py
+python3 espacios/generar_todo.py lavadero
 
-# Un espacio (ejemplo: lavadero)
+# Planta (superior) + alzados (frente) de un espacio
+python3 espacios/generar_vistas.py lavadero
 python3 espacios/lavadero/generar_plano.py
+
+# Solo un alzado (N, S, E u O)
+python3 espacios/generar_vistas.py lavadero S
+
+# Renders de espacio y muebles
 python3 espacios/lavadero/generar_renders.py
-python3 espacios/lavadero/generar_todo.py
 
 # Un mueble
 python3 espacios/lavadero/FURNITURE_PLACARD_SECADO.py
@@ -154,7 +160,7 @@ Si se actualiza el catálogo y hay que reescribir README/LAYOUT/fichas: `python3
 | `oficina` | Oficina / Estudio | 3.10 × 1.70 m (5.3 m²) | ESCRITORIO, BIBLIOTECA, SILLA_ESCRITORIO |
 | `cocina` | Cocina Principal | 2.00 × 3.69 m (7.4 m²) | BAJO_MESADA, MESADA, ALACENA, TORRE_HORNOS |
 | `comedor_diario` | Comedor Diario | 2.08 × 2.89 m (6 m²) | MESA_DESAYUNADOR, BANCOS, BARRA |
-| `lavadero` | Lavadero | 2.00 × 2.81 m útiles / 2.625 m total | PLACARD_SECADO, LAVARROPAS, SECARROPAS, PILETON, MUEBLE_LIMPIEZA |
+| `lavadero` | Lavadero | N 2.08 / S 2.65 × 2.80 m | PLACARD_SECADO, ESCOBERO, BANITORI, PILETON, LAVARROPAS, MESADA_PLANCHAR, ALACENA, MUEBLE_DIVISOR, CAFE_* |
 | `bano_servicio` | Baño de Servicio | 1.30 × 1.20 m (1.6 m²) | INODORO, LAVATORIO |
 | `bano_principal` | Baño Principal en suite | 1.88 × 1.49 m (2.8 m²) | VANITORY, MAMPARA, INODORO |
 | `bano_visitas` | Baño de Visitas | 1.80 × 1.45 m (2.6 m²) | VANITORY, ESPEJO_RETROILUMINADO, DUCHERO |
@@ -162,10 +168,11 @@ Si se actualiza el catálogo y hay que reescribir README/LAYOUT/fichas: `python3
 
 ### Lavadero (estado de proyecto)
 
-* Local extraído del plano original. Planta detallada en `planos/lavadero_planta.png` y `espacios/lavadero/planos/`.
-* **Placard de secado:** 1.50 m de largo × 0.625 m de profundidad × 2.50 m de alto. Arranca junto a la puerta de servicio (muro oeste), frente al interior (este), cierra con tabique sólido de 10 cm. Dos hojas piso a techo de 0.75 m, roble/petiribí, barra perchero, interior ventilado.
-* El tramo norte del placard original (~1.21 m) se recorta y pasa a piso útil; ahí va el piletón.
-* Lavarropas + secarropas en torre 60×60 sobre muro este. Mueble de limpieza 40×35 al norte de la torre.
+* Local no rectangular. Alto **2.80 m**. Norte **2.08 / 2.20**, sur **2.65 / 2.80**, oeste **2.80 / 3.00**. Escalón este en y = 0.52.
+* **Oeste:** placard secado 1.50 + escobero 0.30 + paso + pileta (0.50–0.85) + banitori NW.
+* **Norte:** banitori · lavarropas bajo mesada de planchar 1.48 × 0.60 a 0.85 m · alacena todo el ancho.
+* **Este (sin muro):** abertura 1.60 m + mueble divisor 1.20 × 0.60 × 2.80 (cestos / columna cocción / baulera).
+* **Sur:** coffee station 1.225 m al este de la puerta de servicio.
 
 ### Paleta de materiales (proyecto)
 

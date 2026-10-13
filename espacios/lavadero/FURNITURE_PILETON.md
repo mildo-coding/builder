@@ -1,4 +1,4 @@
-# Piletón de lavar
+# Pileta de lavar
 
 Ficha de carpintería / equipamiento para **Lavadero**.
 
@@ -8,27 +8,27 @@ Ficha de carpintería / equipamiento para **Lavadero**.
 - **Tipo:** pileta
 
 ## Medidas
-- **Frente:** 0.500 m
-- **Profundidad:** 0.400 m
-- **Alto:** 0.900 m
-- **Huella en planta (w × d):** 0.500 × 0.400 m
+- **Frente:** 0.405 m
+- **Profundidad:** 0.500 m
+- **Alto:** 0.350 m
+- **Huella en planta (w × d):** 0.500 × 0.405 m
+- **z piso:** 0.500 m
 
 ## Ubicación
-- **Descripción:** Rincón noroeste, en el piso útil ganado al recortar el placard original.
-- **Origen (x, y):** (0.00, 2.20) m desde el rincón SO del local
+- **Descripción:** Muro oeste, rincón NW. Cuba de 0.50 m a 0.85 m de altura. Visible también desde el alzado norte.
+- **Origen (x, y):** (0.00, 2.00) m desde el rincón SO del local
 - **Frente hacia:** E
 
 ## Materiales
 - **Acero inoxidable** — cuba (clave `metal`)
-- **Roble tratado** — mueble bajo pileta (clave `roble`)
 - **Grifería negra** — pico alto (clave `negro`)
 
 ## Texturas
-Cuba profunda sobre mueble de 90 cm. Grifería negra de pico alto para palanganas.
+Entre el escobero y el banitori queda un paso; la pileta cuelga / apoya en el tramo norte del oeste. Cota superior 0.85 m = mesada de planchar.
 
 ## Componentes
 - cuba 40×35×25
-- mueble con estante de limpieza
+- cota superior 0.85 m
 
 ## Generar render
 

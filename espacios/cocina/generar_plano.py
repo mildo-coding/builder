@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
-"""Genera la planta del espacio Cocina Principal."""
+"""Genera planta (vista superior) y alzados (vista de frente) — Cocina Principal."""
 from __future__ import annotations
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from _comun.render_espacio import generar_plano
+from _comun.render_espacio import generar_vistas
 
 
 def main() -> None:
-    dest = generar_plano("cocina")
-    print(f"OK planta: {dest}")
+    for dest in generar_vistas("cocina"):
+        print(f"OK {dest}")
 
 
 if __name__ == "__main__":

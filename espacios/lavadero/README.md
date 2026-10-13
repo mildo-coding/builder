@@ -4,46 +4,43 @@ Carpeta de trabajo de Arqui para el espacio **Lavadero** (Beruti 3336, piso 23).
 
 ## Contenido
 - `LAYOUT.md` — medidas del local, adyacencias y componentes
-- `generar_plano.py` — planta detallada 1:20 (placard ajustado 1.50 × 0.625)
-- `generar_renders.py` — planta + axonométrica + fichas de todos los muebles
+- `generar_plano.py` — planta + alzados
+- `generar_renders.py` — vistas + axonométrica + fichas
 - `generar_todo.py` — atajo al generador completo
 - `FURNITURE_PLACARD_SECADO.md` + `FURNITURE_PLACARD_SECADO.py` — Placard de secado
-- `FURNITURE_LAVARROPAS.md` + `FURNITURE_LAVARROPAS.py` — Lavarropas
-- `FURNITURE_SECARROPAS.md` + `FURNITURE_SECARROPAS.py` — Secarropas
-- `FURNITURE_PILETON.md` + `FURNITURE_PILETON.py` — Piletón de lavar
-- `FURNITURE_MUEBLE_LIMPIEZA.md` + `FURNITURE_MUEBLE_LIMPIEZA.py` — Mueble de limpieza
+- `FURNITURE_ESCOBERO.md` + `FURNITURE_ESCOBERO.py` — Escobero
+- `FURNITURE_BANITORI.md` + `FURNITURE_BANITORI.py` — Mueble banitori
+- `FURNITURE_PILETON.md` + `FURNITURE_PILETON.py` — Pileta de lavar
+- `FURNITURE_LAVARROPAS.md` + `FURNITURE_LAVARROPAS.py` — Lavarropas frontal
+- `FURNITURE_MESADA_PLANCHAR.md` + `FURNITURE_MESADA_PLANCHAR.py` — Mesada de planchado
+- `FURNITURE_ALACENA.md` + `FURNITURE_ALACENA.py` — Alacena limpieza y baño
+- `FURNITURE_MUEBLE_DIVISOR.md` + `FURNITURE_MUEBLE_DIVISOR.py` — Mueble divisor lavadero–cocina
+- `FURNITURE_CAFE_BAJO.md` + `FURNITURE_CAFE_BAJO.py` — Coffee station — bajo
+- `FURNITURE_CAFE_MESADA.md` + `FURNITURE_CAFE_MESADA.py` — Coffee station — mesada
+- `FURNITURE_CAFE_ALACENA.md` + `FURNITURE_CAFE_ALACENA.py` — Coffee station — alacena
 
 ## Cómo generar (solo a pedido del usuario)
 
-Arqui no ejecuta estos comandos salvo que el usuario lo pida. El usuario elige cuándo hacer el render.
-
-Desde esta carpeta (`espacios/lavadero`):
-
 ```bash
-# Planta
 python3 generar_plano.py
-
-# Renders del espacio y de cada mueble
 python3 generar_renders.py
-
-# Atajo
 python3 generar_todo.py
 
-# Un mueble puntual
+# Un mueble
 python3 FURNITURE_PLACARD_SECADO.py
-python3 FURNITURE_LAVARROPAS.py
-python3 FURNITURE_SECARROPAS.py
+python3 FURNITURE_ESCOBERO.py
+python3 FURNITURE_BANITORI.py
 python3 FURNITURE_PILETON.py
-python3 FURNITURE_MUEBLE_LIMPIEZA.py
+python3 FURNITURE_LAVARROPAS.py
+python3 FURNITURE_MESADA_PLANCHAR.py
+python3 FURNITURE_ALACENA.py
+python3 FURNITURE_MUEBLE_DIVISOR.py
+python3 FURNITURE_CAFE_BAJO.py
+python3 FURNITURE_CAFE_MESADA.py
+python3 FURNITURE_CAFE_ALACENA.py
 ```
 
-Los PNG se guardan en:
-- `espacios/lavadero/planos/` (incluye la lámina detallada `lavadero_planta.png`)
-- `espacios/lavadero/renders/`
-- `espacios/lavadero/renders/`
-- `planos/lavadero_planta.png`
-- `renders/lavadero/`
-
 ## Medidas de referencia
-- Local: 2.00 × 2.81 m (5.6 m²)
-- Alto: 2.50 m
+- Norte 2.08 m útiles / 2.20 tot. · Sur 2.65 m útiles / 2.80 tot. · Oeste 2.80 m útiles / 3.00 tot.
+- Alto: 2.80 m
+- Vanos: puerta de servicio 0.80 m (sur) · paso a cocina 1.60 m (este)

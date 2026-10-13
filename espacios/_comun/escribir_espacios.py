@@ -13,18 +13,18 @@ sys.path.insert(0, str(ROOT))
 from _comun.catalogo import ESPACIOS, ORDEN_ESPACIOS, ids_muebles  # noqa: E402
 
 GEN_PLANO = '''#!/usr/bin/env python3
-"""Genera la planta del espacio {nombre}."""
+"""Genera planta (vista superior) y alzados (vista de frente) — {nombre}."""
 from __future__ import annotations
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from _comun.render_espacio import generar_plano
+from _comun.render_espacio import generar_vistas
 
 
 def main() -> None:
-    dest = generar_plano("{slug}")
-    print(f"OK planta: {{dest}}")
+    for dest in generar_vistas("{slug}"):
+        print(f"OK {{dest}}")
 
 
 if __name__ == "__main__":
@@ -39,12 +39,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from _comun.catalogo import ids_muebles, mueble
-from _comun.render_espacio import generar_axonometria, generar_plano
+from _comun.render_espacio import generar_axonometria, generar_vistas
 from _comun.render_mueble import generar_lamina
 
 
 def main() -> None:
-    print(generar_plano("{slug}"))
+    for dest in generar_vistas("{slug}"):
+        print(dest)
     print(generar_axonometria("{slug}"))
     base = Path(__file__).resolve().parent
     for mid in ids_muebles("{slug}"):

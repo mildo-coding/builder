@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Genera planta + renders + fichas de muebles de Lavadero."""
+"""Atajo: planta + alzados + axonométrica + fichas — Lavadero."""
 from __future__ import annotations
 import runpy
 from pathlib import Path

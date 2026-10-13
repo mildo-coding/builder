@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
-"""Planta detallada del lavadero (cota de placard 1.50 × 0.625)."""
-from __future__ import annotations
+"""Planta (vista superior) y alzados (vista de frente) del lavadero.
 
-import runpy
+Geometría: N 2.08 / S 2.65 × L 2.80 m. Escalón este en y = 0.52.
+"""
+from __future__ import annotations
+import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from _comun.render_espacio import generar_vistas
 
 
 def main() -> None:
-    runpy.run_path(str(ROOT / "planos" / "generar_planta_lavadero.py"), run_name="__main__")
+    for dest in generar_vistas("lavadero"):
+        print(f"OK {dest}")
 
 
 if __name__ == "__main__":

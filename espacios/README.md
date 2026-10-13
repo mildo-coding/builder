@@ -13,7 +13,7 @@ Carpetas de trabajo de **Arqui** (arquitecto de la refacción). Hay un directori
 | `oficina` | Oficina / Estudio | 5.3 m² |
 | `cocina` | Cocina Principal | 7.4 m² |
 | `comedor_diario` | Comedor Diario | 6.0 m² |
-| `lavadero` | Lavadero | 5.6 m² |
+| `lavadero` | Lavadero | 6.1 m² |
 | `bano_servicio` | Baño de Servicio | 1.6 m² |
 | `bano_principal` | Baño Principal | 2.8 m² |
 | `bano_visitas` | Baño de Visitas | 2.6 m² |
@@ -34,6 +34,14 @@ Desde la raíz del proyecto o desde `espacios/`:
 
 ```bash
 python3 espacios/generar_todo.py
+python3 espacios/generar_todo.py lavadero
+```
+
+Planta (vista superior) y alzados (vista de frente) de un espacio:
+
+```bash
+python3 espacios/generar_vistas.py lavadero
+python3 espacios/lavadero/generar_plano.py
 ```
 
 Un espacio:

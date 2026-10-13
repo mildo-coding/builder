@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render del mueble Mueble de limpieza — Lavadero."""
+"""Render del mueble Escobero — Lavadero."""
 from __future__ import annotations
 import sys
 from pathlib import Path
@@ -10,7 +10,7 @@ from _comun.render_mueble import generar_lamina
 
 
 def main() -> None:
-    spec = mueble("lavadero", "MUEBLE_LIMPIEZA")
+    spec = mueble("lavadero", "ESCOBERO")
     dest = generar_lamina(spec, Path(__file__).resolve().parent)
     print(f"OK {dest}")
 

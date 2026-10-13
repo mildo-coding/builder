@@ -1,4 +1,4 @@
-# Lavarropas
+# Lavarropas frontal
 
 Ficha de carpintería / equipamiento para **Lavadero**.
 
@@ -12,22 +12,23 @@ Ficha de carpintería / equipamiento para **Lavadero**.
 - **Profundidad:** 0.600 m
 - **Alto:** 0.850 m
 - **Huella en planta (w × d):** 0.600 × 0.600 m
+- **z piso:** 0.000 m
 
 ## Ubicación
-- **Descripción:** Muro este, tramo sur-centro, junto a la puerta a cocina. Carga frontal.
-- **Origen (x, y):** (2.02, 0.90) m desde el rincón SO del local
-- **Frente hacia:** O
+- **Descripción:** Muro norte, bajo la mesada de planchar, al este del banitori.
+- **Origen (x, y):** (0.51, 2.20) m desde el rincón SO del local
+- **Frente hacia:** S
 
 ## Materiales
 - **Acero blanco / grafito** — carcasa (clave `grafito`)
 - **Vidrio** — visor (clave `vidrio`)
 
 ## Texturas
-Equipo de 8–9 kg, 60×60 cm, encastrable bajo mesada técnica opcional.
+Equipo 60×60×85 cm. Carga frontal hacia el local.
 
 ## Componentes
 - carga frontal
-- desagüe y toma de agua en muro este
+- bajo mesada
 
 ## Generar render
 
